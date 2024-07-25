@@ -11,14 +11,27 @@ const author = document.querySelector("#author");
 const pages = document.querySelector("#pages");
 const read = document.querySelector("#read");
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.info = function() {
-        return `${this.title}, ${this.pages} pages, ${this.read ? "read" : "not read yet"}`
-    };
+//function Book(title, author, pages, read) {
+//    this.title = title;
+//    this.author = author;
+//    this.pages = pages;
+//    this.read = read;
+//    this.info = function() {
+//        return `${this.title}, ${this.pages} pages, ${this.read ? "read" : "not read yet"}`
+//    };
+//}
+
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+
+    info() {
+        return `${this.title}, ${this.pages} pages, ${this.read ? "read" : "not read yet"}`;
+    }
 }
 
 function addBookToLibrary(book) {
@@ -57,6 +70,9 @@ function addCard(book, container) {
 
     removeBtn.addEventListener("click", () => {
         myLibrary.splice(removeBtn.parentElement.getAttribute("Order"), 1);
+        for (item in myLibrary) {
+            item.setAttribute("Order", myLibrary.indexOf(item));
+        }
         removeBtn.parentElement.remove();
     });
 
